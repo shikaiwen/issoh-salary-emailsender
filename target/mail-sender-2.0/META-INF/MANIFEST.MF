@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Implementation-Title: kowa-mail-sender
+Implementation-Version: 2.0
+Archiver-Version: Plexus Archiver
+Built-By: issoh
+Implementation-Vendor-Id: org.springframework.boot
+Spring-Boot-Version: 1.5.8.RELEASE
+Implementation-Vendor: Pivotal Software, Inc.
+Main-Class: org.springframework.boot.loader.JarLauncher
+Start-Class: com.kowa.batch.WebApplication
+Spring-Boot-Classes: BOOT-INF/classes/
+Spring-Boot-Lib: BOOT-INF/lib/
+Created-By: Apache Maven 3.3.9
+Build-Jdk: 1.8.0_191
+Implementation-URL: http://projects.spring.io/spring-boot/mail-sender/
+

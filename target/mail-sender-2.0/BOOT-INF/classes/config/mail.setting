@@ -1,0 +1,7 @@
+host = smtp.issoh.co.jp
+port = 587
+from = ken.jyo@issoh.co.jp
+user = ken.jyo@issoh.co.jp
+pass = q#Gh6Ufx
+
+#pass = q1w2e3
