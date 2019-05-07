@@ -92,8 +92,7 @@ public class WebApplication implements CommandLineRunner {
 
         PDFExtractor.unZipIt(allFolderPath + File.separator + zipFileName, pdfFolder);
 
-        System.out.println(" extract and rename file to folder " + pdfFolder + " completed ..");
-
+        System.out.println(" pdf ファイルをzipから抽出して,  " + pdfFolder + " に保存しました! ");
 
         List<String> list = Arrays.asList(IOUtils.toString(userMappingStream, "UTF-8").split("\n"));
 
@@ -104,7 +103,7 @@ public class WebApplication implements CommandLineRunner {
             File f = new File(pdfFolder, PDFExtractor.getOutputFileName(username));
             if(!f.exists()){
 //                throw new RuntimeException("file not exists :" + username + ".pdf");
-                System.out.println("file not exists :" + f.getAbsolutePath());
+                System.out.println("ファイル　" + f.getAbsolutePath() +"　が存在しませんので、ご確認ください");
             }else{
 
                 String[] strs = new String[2];
@@ -114,27 +113,26 @@ public class WebApplication implements CommandLineRunner {
             }
         }
 
-        System.out.println("file check over , existing user file count :" + hasFileUserList.size() );
-        System.out.println("enter Y if you want to send email now , press other key to quit ");
+        System.out.println(" 準備してきたファイル数は　:" + hasFileUserList.size() );
+        System.out.println("実行するには Yボタンを押してからEnterキーを押します。 他のキーを押すとメールの送信を停止します ");
         Scanner scanner = new Scanner(System.in);
         String line = scanner.nextLine();
 
         if("Y".equalsIgnoreCase(line)){
 
-            String userEmail = "kaibun.shi@issoh.co.jp";
-            File f = new File(pdfFolder, PDFExtractor.getOutputFileName("施凱文"));
-            System.out.println(userEmail + ":" + emailTitle + ":" + emailContent);
-            JavaMailWithAttachment.sendTest(userEmail,emailTitle,emailContent,f);
+//            String userEmail = "kaibun.shi@issoh.co.jp";
+//            File f = new File(pdfFolder, PDFExtractor.getOutputFileName("施凱文"));
+//            System.out.println(userEmail + ":" + emailTitle + ":" + emailContent);
+//            JavaMailWithAttachment.sendTest(userEmail,emailTitle,emailContent,f);
 
+             for (String [] strs : hasFileUserList) {
+                 System.out.print("社員名:"+ strs[0]);
+                 System.out.println("メールアドレス:"+ strs[1]);
+                 File f = new File(pdfFolder, PDFExtractor.getOutputFileName(strs[0]));
+                JavaMailWithAttachment.sendTest(strs[1],emailTitle,emailContent,f);
+            }
 
-//             for (String [] strs : hasFileUserList) {
-//                 System.out.print("username:"+ strs[0]);
-//                 System.out.println("email:"+ strs[1]);
-//                 File f = new File(pdfFolder, PDFExtractor.getOutputFileName(strs[0]));
-//                JavaMailWithAttachment.sendTest(strs[1],emailTitle,emailContent,f);
-//            }
-
-            System.out.println("send over...");
+            System.out.println("メールの送信が完了しました。");
         }else{
             System.out.println("good bye ");
         }
